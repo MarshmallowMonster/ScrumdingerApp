@@ -8,19 +8,20 @@
 import SwiftUI
 import AVFoundation
 
-private var player: AVPlayer { AVPlayer.sharedDingPlayer }
-
 struct MeetingView: View {
     @Binding var scrum: DailyScrum
     @StateObject var scrumTimer = ScrumTimer()
+    
+    private var player: AVPlayer { AVPlayer.sharedDingPlayer }
+    
     var body: some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 16.0)
+            RoundedRectangle(cornerRadius: 16)
                 .fill(scrum.theme.mainColor)
             VStack {
                 MeetingHeaderView(secondsElapsed: scrumTimer.secondsElapsed, secondsRemaining: scrumTimer.secondsRemaining, theme: scrum.theme)
                 Circle()
-                    .strokeBorder(lineWidth: 24, antialiased: true)
+                    .strokeBorder(lineWidth: 24)
                 MeetingFooterView(speakers: scrumTimer.speakers, skipAction: scrumTimer.skipSpeaker)
             }
         }
@@ -36,6 +37,8 @@ struct MeetingView: View {
         }
         .onDisappear {
             scrumTimer.stopScrum()
+            let newHistory = History(attendees: scrum.attendees, lengthInMinutes: scrum.timer.secondsElapsed / 60)
+            scrum.history.insert(newHistory, at: 0)
         }
         .navigationBarTitleDisplayMode(.inline)
     }
