@@ -4,7 +4,6 @@
 //
 //  Created by Артем Гузовский on 19.01.23.
 //
-// First up
 
 import SwiftUI
 
