@@ -37,14 +37,14 @@ struct MeetingHeaderView: View {
                 VStack(alignment: .trailing) {
                     Text("Seconds Remaining")
                         .font(.caption)
-                    Label("\(secondsRemaining )", systemImage: "hourglass.tophalf.fill")
+                    Label("\(secondsRemaining)", systemImage: "hourglass.tophalf.fill")
                         .labelStyle(.trailingIcon)
                 }
             }
         }
         .accessibilityElement(children: .ignore)
         .accessibilityLabel("Time remaining")
-        .accessibilityValue("\(secondsRemaining) minutes")
+        .accessibilityValue("\(minutesRemaining) minutes")
         .padding([.top, .horizontal])
     }
 }

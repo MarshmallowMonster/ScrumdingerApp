@@ -12,14 +12,14 @@ struct MeetingFooterView: View {
     var skipAction: () -> Void
     
     private var speakerNumber: Int? {
-        guard let index = speakers.firstIndex(where: { !$0.isCompleted }) else { return nil }
+        guard let index = speakers.firstIndex(where: { !$0.isCompleted }) else { return nil}
         return index + 1
     }
     private var isLastSpeaker: Bool {
         return speakers.dropLast().allSatisfy { $0.isCompleted }
     }
     private var speakerText: String {
-        guard let speakerNumber = speakerNumber else { return "No more speakers"}
+        guard let speakerNumber = speakerNumber else { return "No more speakers" }
         return "Speaker \(speakerNumber) of \(speakers.count)"
     }
     
@@ -32,7 +32,7 @@ struct MeetingFooterView: View {
                     Text(speakerText)
                     Spacer()
                     Button(action: skipAction) {
-                        Image(systemName:"forward.fill")
+                        Image(systemName: "forward.fill")
                     }
                     .accessibilityLabel("Next speaker")
                 }
